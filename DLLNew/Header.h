@@ -16,7 +16,7 @@ typedef struct us user;
 typedef int(_cdecl* MyFinctionCount)();
 typedef user* (_cdecl* MyFunctionRead)(user*, int*);
 typedef void(_cdecl* MyFunctionWrite)(user*, int);
-//typedef user* (_cdecl* MyFunctionSearch)(char*, user*, int, int*);
+typedef user* (_cdecl* MyFunctionSearch)(char*, user*, int, int*);
 typedef void(_cdecl* MyFunctionSr)(user*, int);
 
 
@@ -25,5 +25,6 @@ __declspec(dllexport) user* ReadData(user* Users, int* kol);
 
 __declspec(dllexport) void WriteData(user* Users, int kol);
 
+__declspec(dllexport) void LastNameSearch(char* str, user* Users, int count, int* kolSurname);
 __declspec(dllexport) void MiddleAge(user* Users, int kol);
 

@@ -204,3 +204,36 @@ void MiddleAge(user* Users, int count)
 	WriteFile(fileRezurt, str, strlen(str), &d, NULL);
 	CloseHandle(fileRezurt);
 }
+
+//поиск записей о пользователях по фамилии (или ее части). 
+user* LastNameSearch(char* str, user* Users, int count, int* kolSurname)
+{
+	int i = 0;
+	int p = 0;
+	while (i != count)
+	{
+		if (strstr(Users[i].surname, str) != NULL)
+		{
+			p++;
+		}
+		i++;
+	}
+	int ii = 0;
+	user* UsersSurname = calloc(p, sizeof(user));
+	int j = 0;
+	while (ii != count)
+	{
+		if (strstr(Users[ii].surname, str) != NULL)
+		{
+			UsersSurname[j].surname = Users[ii].surname;
+			UsersSurname[j].name = Users[ii].name;
+			UsersSurname[j].patronomic = Users[ii].patronomic;
+			UsersSurname[j].age = Users[ii].age;
+			j++;
+		}
+		ii++;
+	}
+	*kolSurname = j;
+	return UsersSurname;
+}
+
