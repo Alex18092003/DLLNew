@@ -17,12 +17,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	MyFunctionRead myFunRead = (MyFunctionRead)GetProcAddress(hMyDLL, "ReadData");
 	Users = myFunRead(Users, &count);
 	int kolvan = 0;
-	// ср возраст
-	MyFunctionSr myFunSr = (MyFunctionSr)GetProcAddress(hMyDLL, "MiddleAge");
-	myFunSr(Users, kolvan);
+	//поиск по фамилии
+	MyFunctionSearch myFunSearch = (MyFunctionSearch)GetProcAddress(hMyDLL, "LastNameSearch");
+	Users = myFunSearch("Фамилия", Users, count, &kolvan);
+	
 	//вывод
 	MyFunctionWrite myFunkWrite = (MyFunctionWrite)GetProcAddress(hMyDLL, "WriteData");
 	myFunkWrite(Users, kolvan);
+	// ср возраст
+	MyFunctionSr myFunSr = (MyFunctionSr)GetProcAddress(hMyDLL, "MiddleAge");
+	myFunSr(Users, kolvan);
 
 	FreeLibrary(hMyDLL);
 

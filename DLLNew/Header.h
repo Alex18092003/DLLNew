@@ -21,10 +21,10 @@ typedef void(_cdecl* MyFunctionSr)(user*, int);
 
 
 __declspec(dllexport) int GetRowCountData();
-__declspec(dllexport) user* ReadData(user* Users, int* kol);
+__declspec(dllexport) user* ReadData(user* Users, int* count);
 
-__declspec(dllexport) void WriteData(user* Users, int kol);
+__declspec(dllexport) void WriteData(user* Users, int count);
 
-__declspec(dllexport) void LastNameSearch(char* str, user* Users, int count, int* kolSurname);
-__declspec(dllexport) void MiddleAge(user* Users, int kol);
+__declspec(dllexport) user* LastNameSearch(char* str, user* Users, int count, int* kolSurname);
+__declspec(dllexport) void MiddleAge(user* Users, int count);
 
