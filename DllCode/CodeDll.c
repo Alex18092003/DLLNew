@@ -95,6 +95,7 @@ int GetParse(char* str, user* Users, int* count)
 				j++;
 				i++;
 			}
+			i++;
 			Users[k].name = calloc(j + 1, sizeof(char));
 			strncpy(Users[k].name, stroka, j);
 			free(stroka);
@@ -112,7 +113,7 @@ int GetParse(char* str, user* Users, int* count)
 			free(stroka);
 			stroka = calloc(100, 1);
 			j = 0;
-			while (str[i] != '\"')
+			while (str[i] != '"')
 			{
 				stroka[j] = str[i];
 				j++;
@@ -152,7 +153,7 @@ user* ReadData(user* Users, int* count)
 void WriteData(user* Users, int count)
 {
 	HANDLE fileRezurt;
-	fileRezurt = CreateFile(L"Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileRezurt = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	DWORD d;
 	int i = 0;
 	char* str;
@@ -190,7 +191,7 @@ void MiddleAge(user* Users, int count)
 	}
 	double SrednAge = (double)summa / (double)count;
 	HANDLE fileRezurt;
-	fileRezurt = CreateFile(L"Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileRezurt = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (fileRezurt == INVALID_HANDLE_VALUE)
 	{
 		MessageBox(NULL, L"При записи файла возникла ошибка!", L"Окно ошибки", MB_OK);

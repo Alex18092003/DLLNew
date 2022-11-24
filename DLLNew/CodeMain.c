@@ -9,7 +9,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//if (!(hMyDLL = LoadLibrary(PATH))) return 1;
 	if ((hMyDLL = LoadLibraryA(PATH)) == NULL) return 11;
 
-
 	MyFinctionCount myFunkCount = (MyFinctionCount)GetProcAddress(hMyDLL, "GetRowCountData");
 	user* Users = calloc(myFunkCount(), sizeof(user));
 	int count = 0;
@@ -17,16 +16,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	MyFunctionRead myFunRead = (MyFunctionRead)GetProcAddress(hMyDLL, "ReadData");
 	Users = myFunRead(Users, &count);
 	int kolvan = 0;
+
 	//поиск по фамилии
 	MyFunctionSearch myFunSearch = (MyFunctionSearch)GetProcAddress(hMyDLL, "LastNameSearch");
-	Users = myFunSearch("Фамилия", Users, count, &kolvan);
+	Users = myFunSearch("Иван", Users, count, &kolvan);
 	
-	//вывод
+	//запись
 	MyFunctionWrite myFunkWrite = (MyFunctionWrite)GetProcAddress(hMyDLL, "WriteData");
 	myFunkWrite(Users, kolvan);
+
+
 	// ср возраст
-	MyFunctionSr myFunSr = (MyFunctionSr)GetProcAddress(hMyDLL, "MiddleAge");
-	myFunSr(Users, kolvan);
+	/*MyFunctionSr myFunSr = (MyFunctionSr)GetProcAddress(hMyDLL, "MiddleAge");
+	myFunSr(Users, kolvan);*/
 
 	FreeLibrary(hMyDLL);
 
