@@ -40,7 +40,7 @@ int  GetRowCountData() // досчет строк
 {
 	HANDLE fileStart;
 	// открываемый файл, для чтения, для совместного чтения, защита по умолчанию,только существующий файл,обычный файл,атрибутов шаблона нет   
-	fileStart = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\SistDll\\DllCode\\Users.csv", GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileStart = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Users.csv", GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (fileStart == INVALID_HANDLE_VALUE)
 	{
 		MessageBox(NULL, L"При открытие файла возникла ошибка!", L"Окно ошибки", MB_OK);
@@ -135,7 +135,7 @@ user* ReadData(user* Users, int* count)
 {
 	HANDLE fileStart;
 	// открываемый файл, для чтения, для совместного чтения, защита по умолчанию,только существующий файл,обычный файл,атрибутов шаблона нет   
-	fileStart = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\SistDll\\DllCode\\Users.csv", GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileStart = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Users.csv", GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (fileStart == INVALID_HANDLE_VALUE)
 	{
 		MessageBox(NULL, L"При открытие файла возникла ошибка!", L"Окно ошибки", MB_OK);
@@ -152,7 +152,7 @@ user* ReadData(user* Users, int* count)
 void WriteData(user* Users, int count)
 {
 	HANDLE fileRezurt;
-	fileRezurt = CreateFile(L"..\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_HIDDEN, NULL);
+	fileRezurt = CreateFile(L"Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	DWORD d;
 	int i = 0;
 	char* str;
@@ -190,7 +190,7 @@ void MiddleAge(user* Users, int count)
 	}
 	double SrednAge = (double)summa / (double)count;
 	HANDLE fileRezurt;
-	fileRezurt = CreateFile(L"..\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileRezurt = CreateFile(L"Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (fileRezurt == INVALID_HANDLE_VALUE)
 	{
 		MessageBox(NULL, L"При записи файла возникла ошибка!", L"Окно ошибки", MB_OK);
