@@ -60,9 +60,9 @@ int  GetRowCountData() // досчет строк
 		}
 		i++;
 	}
-	return count;
+	return count; // возвращает количество строк
 }
-//парсим
+//парсим считанную строку в экземпляр структур
 int GetParse(char* str, user* Users, int* count)
 {
 	int j = 0;
@@ -129,7 +129,7 @@ int GetParse(char* str, user* Users, int* count)
 
 		}
 	}
-	*count = k;
+	*count = k; // количество записей 
 }
 
 user* ReadData(user* Users, int* count)
@@ -147,7 +147,7 @@ user* ReadData(user* Users, int* count)
 	ReadFile(fileStart, str, 100000, &d, NULL);
 	CloseHandle(fileStart);
 	GetParse(str, Users, count);
-	return Users;
+	return Users; // возвращ укатель на первый элемент структур того же типа 
 }
 
 void WriteData(user* Users, int count)
@@ -179,19 +179,20 @@ void WriteData(user* Users, int count)
 	CloseHandle(fileRezurt);
 }
 
+
 //функция для нахождения среднего возраста некоторого количества пользователей.
-void MiddleAge(user* Users, int count)
+void MiddleAge(user* Users, int count) // передаем новую структуру сформированную в LastNameSearch
 {
 	int i = 0;
 	int summa = 0;
-	while (i != count)
+	while (i != count) // подсчет суммы возрастов из структуры
 	{
 		summa += Users[i].age;
 		i++;
 	}
-	double SrednAge = (double)summa / (double)count;
+	double SrednAge = (double)summa / (double)count; // ср возр
 	HANDLE fileRezurt;
-	fileRezurt = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	fileRezurt = CreateFile(L"C:\\Users\\лебедевааф\\source\\repos\\DLLNew\\DllCode\\Rezult.csv", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (fileRezurt == INVALID_HANDLE_VALUE)
 	{
 		MessageBox(NULL, L"При записи файла возникла ошибка!", L"Окно ошибки", MB_OK);
@@ -200,8 +201,9 @@ void MiddleAge(user* Users, int count)
 	DWORD d;
 	char* str = calloc(100000, sizeof(char));
 	sprintf(str, "Средний возраст = %f", SrednAge);
-	//ovelapf.Offset = 0xFFFFFFFF;
-	//ovelapf.OffsetHigh = 0xFFFFFFFF;
+	SetFilePointer(fileRezurt, 0, NULL, FILE_END); // запись в конец файла 
+	ovelapf.Offset = 0xFFFFFFFF;
+	ovelapf.OffsetHigh = 0xFFFFFFFF;
 	WriteFile(fileRezurt, str, strlen(str), &d, NULL);
 	CloseHandle(fileRezurt);
 }
@@ -213,20 +215,20 @@ user* LastNameSearch(char* str, user* Users, int count, int* kolSurname)
 	int p = 0;
 	while (i != count)
 	{
-		if (strstr(Users[i].surname, str) != NULL)
+		if (strstr(Users[i].surname, str) != NULL) // находит первое вхождения строки(указатель на строку, в которой ведется поиск, указатель на искомую строку.)
 		{
 			p++;
 		}
 		i++;
 	}
 	int ii = 0;
-	user* UsersSurname = calloc(p, sizeof(user));
+	user* UsersSurname = calloc(p, sizeof(user)); // создание нового массива структур
 	int j = 0;
-	while (ii != count)
+	while (ii != count) // идем по строкам
 	{
-		if (strstr(Users[ii].surname, str) != NULL)
+		if (strstr(Users[ii].surname, str) != NULL) // находит первое вхождения строки(указатель на строку, в которой ведется поиск, указатель на искомую строку.)
 		{
-			UsersSurname[j].surname = Users[ii].surname;
+			UsersSurname[j].surname = Users[ii].surname; // запись в новый массив структур результата  
 			UsersSurname[j].name = Users[ii].name;
 			UsersSurname[j].patronomic = Users[ii].patronomic;
 			UsersSurname[j].age = Users[ii].age;
@@ -234,7 +236,7 @@ user* LastNameSearch(char* str, user* Users, int count, int* kolSurname)
 		}
 		ii++;
 	}
-	*kolSurname = j;
-	return UsersSurname;
+	*kolSurname = j; // количество таких фамилий - новых записей
+	return UsersSurname; // возвращает новый массив структур с нужными фамилиями 
 }
 

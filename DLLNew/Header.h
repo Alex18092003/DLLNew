@@ -3,7 +3,8 @@
 #include <math.h>
 #include <malloc.h>
 #include <Windows.h>
-
+OVERLAPPED ovelapf; // для записи в конец файла
+// описание структуры
 struct us
 {
 	char* surname;
@@ -12,7 +13,7 @@ struct us
 	int age;
 };
 typedef struct us user;
-
+// прототипы используемых функций
 typedef int(_cdecl* MyFinctionCount)();
 typedef user* (_cdecl* MyFunctionRead)(user*, int*);
 typedef void(_cdecl* MyFunctionWrite)(user*, int);
